@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Bitcoin Lottery </title>
+	<script type="text/javascript" src="js/bower/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="js/bower/qrcodejs/qrcode.js"></script>
+
+	<script type="text/javascript" src="js/bower/underscore/underscore.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+	<style type="text/css">
+	.template{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+
+<div id="main" class="template">
+	<a id="address-container" href="bitcoin:{{address}}">
+		<div class="qr-code"></div>
+		<span id="address" class="bitcoin-address">{{address}}</span>
+	</a>
+
+	<div class="round-stats">
+		<h1>round stats</h1>
+		<div>tickets: {{ Math.floor(satoshi/10000)}}</div>
+		<div>BTC: {{ (satoshi/100000000).toFixed(4) }}&#3647;</div>
+		<div>time left: {{ 0 }}</div>
+	</div>
+
+	<p id="about">
+		The Bitcoin Lottery is a simple ticket-based lottery. The more tickets you have, the higher chance you have to win. 
+
+		Each round is one week, and reset on Sundays. Winnings are paid out every Monday.  
+	</p>
+
+	<p id="instructions">
+		Buy tickets by sending Bitcoin to the address above. Tickets cost .0001&#3647; each.
+	</p>
+</div>
+
+</body>
+</html>
