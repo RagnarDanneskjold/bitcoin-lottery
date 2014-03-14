@@ -15,9 +15,11 @@ window.addEventListener('load', function(){
 		var data = JSON.parse(dataStr);
 		console.log(data);
 
+		app.model.rawData = data;
 		app.model.address = data.address;
 		app.model.satoshi = data.total_received;
 		app.render();
+
 	});
 
 });
@@ -37,8 +39,12 @@ var app = {
 		    colorLight : "#ffffff",
 		    correctLevel : QRCode.CorrectLevel.H
 		});
+
+		new Ticker(document.querySelector('.ticker-container'), this.model.rawData.secondsLeft);
+
 	}
 };
+
 var utils = {
 
 	log:function(){

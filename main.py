@@ -2,11 +2,14 @@
 
 # import the Bottle framework
 from bottle import Bottle
-import urllib2
 import json
+import PotAddress
+from datetime import datetime
+import util
 
 # Create the Bottle WSGI application.
 bottle = Bottle()
+startDate = datetime(2014, 3, 22)
 
 # Define an handler for 404 errors.
 @bottle.error(404)
@@ -18,21 +21,16 @@ def error_404(error):
 # Define an handler for the root URL of our application.
 @bottle.route('/api/targetAddress')
 def getTargetAddress():
-	address = '1Gt3aEWRp3kPwimW8KTxjGQZ8u7TtsaLU6'
-	data = getAddressData(address)
-	return data
+	address = PotAddress.getCurrentAddress(startDate)
+	data = PotAddress.getData(address)
 
-def getAddressData(address):
+	dataDict = json.loads(data);
+	dataDict["secondsLeft"] = util.getTimeLeft(startDate)
+	print dataDict
 
-	url = 'http://blockchain.info/address/' + address + '?format=json'
-
-	req = urllib2.Request(url)
-	f = urllib2.urlopen(req)
-	response = f.read()
-	f.close()
-	
-	return response
+	return json.dumps(dataDict)
 
 def determineWinner():
 	#TODO: figure out who the winner is
+	#TODO: store winner in database or something. maybe send an email to notify me
 	print ''
