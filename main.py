@@ -6,6 +6,7 @@ import json
 import PotAddress
 from datetime import datetime
 import util
+from pprint import pprint
 
 # Create the Bottle WSGI application.
 bottle = Bottle()
@@ -23,14 +24,31 @@ def error_404(error):
 def getTargetAddress():
 	address = PotAddress.getCurrentAddress(startDate)
 	data = PotAddress.getData(address)
-
 	dataDict = json.loads(data);
-	dataDict["secondsLeft"] = util.getTimeLeft(startDate)
-	print dataDict
+	
+	output = {
+		"secondsLeft":util.getTimeLeft(startDate),
+		"address":address,
+		"final_balance":dataDict['final_balance']
+	}
 
-	return json.dumps(dataDict)
+	return json.dumps(output)
+
+@bottle.route('api/ticketsByAddress')
+def ticketsByAddress():
+	print 'ticketsByAddress'
+
+	#TODO: get tickets for a particular address. Keep in mind address can deposit multiple times
+
+
+
 
 def determineWinner():
+	#TODO: set this function to run as a chron job @ 12 hr interval. Tx might still be pending, so need to re-check
 	#TODO: figure out who the winner is
 	#TODO: store winner in database or something. maybe send an email to notify me
-	print ''
+	print 'asdf'
+
+
+#TODO: redirect to bitcoin-ticket.custom
+# http://stackoverflow.com/questions/1364733/block-requests-from-appspot-com-and-force-custom-domain-in-google-app-engine

@@ -17,7 +17,7 @@ window.addEventListener('load', function(){
 
 		app.model.rawData = data;
 		app.model.address = data.address;
-		app.model.satoshi = data.total_received;
+		app.model.satoshi = data.final_balance;
 		app.render();
 
 	});
