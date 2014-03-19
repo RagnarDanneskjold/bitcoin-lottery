@@ -1,6 +1,6 @@
-Ticker = function(element, countdownSeconds){
+Ticker = function(element){
 
-	var secondsLeft = countdownSeconds;
+	var secondsLeft = parseInt(element.innerHTML);
 
 	var lastTime = Date.now();
 	function tick(){

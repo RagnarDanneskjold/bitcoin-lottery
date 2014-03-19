@@ -43,6 +43,9 @@ handlers:
 - url: /api/targetAddress
   script: main.bottle
 
+- url: /api/ticketsByAddress
+  script: main.bottle
+
 - url: /
   static_files: site/index.html
   upload: site/index.html

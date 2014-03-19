@@ -1,8 +1,5 @@
 from datetime import datetime
-import urllib2
 import util
-
-#TODO: rename this class to something else... DeopsitAddress
 
 addressList = [
 	'1Gt3aEWRp3kPwimW8KTxjGQZ8u7TtsaLU6', #test
@@ -26,11 +23,9 @@ def getCurrentAddress(startDate):
 
 def getData(address):
 
+	#TODO: cache this on the server so we don't have to make a request to blockchain every time a user hits the site
+	# grab new data at a max rate of every 5 minutes
 	url = 'http://blockchain.info/address/' + address + '?format=json'
+	json = util.getJSON(url);
 
-	req = urllib2.Request(url)
-	f = urllib2.urlopen(req)
-	response = f.read()
-	f.close()
-	
-	return response
+	return json

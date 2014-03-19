@@ -25,9 +25,9 @@
 
 	<div class="round-stats">
 		<h1>current round</h1>
-		<div>tickets: {{ Math.floor(satoshi/10000)}}</div>
-		<div>BTC: {{ (satoshi/100000000).toFixed(4) }}&#3647;</div>
-		<div>time left: <span class="ticker-container">{{ 0 }}</span></div>
+		<div>tickets: {{ Math.floor(final_balance/100000)}}</div>
+		<div>BTC: &#3647;{{ (final_balance/100000000).toFixed(3) }}</div>
+		<div>time left: <span class="ticker-container">{{ secondsLeft }}</span></div>
 	</div>
 
 	<div id="about">
@@ -35,17 +35,22 @@
 		The Bitcoin Lottery is a simple ticket-based lottery. The more tickets you have, the higher chance you have to win.
 		</p> 
 		<p>
-		Each round is one week, and winnings are paid out within a day. Winnings will be deposited into the address that bought the winning ticket. The house takes 2%. 
+		Each round is one week, and winnings are paid out within a day. Winnings will be deposited into the address that bought the winning ticket. The house fee is 2%. 
 		</p>
 	</div>
 
 	<p id="instructions">
-		Buy tickets by sending Bitcoin to the address above. Tickets cost .0001&#3647; each.
+		Buy tickets by sending Bitcoin to the address above. Tickets cost &#3647;0.001 (${{ (BTC_USD*.001).toFixed(4) }}) each.
 	</p>
 
 	<div id="buying-bitcoin">
 		Need coins? Buy from <a href="http://coinbase.com" target="_blank">Coinbase</a>
 	</div>
+
+	<div id="support">
+		Having problems? Email support at <a href="mailto:josh@bitcoin-ticket.com">josh@bitcoin-ticket.com</a>
+	</div>
+
 </div>
 
 </body>
