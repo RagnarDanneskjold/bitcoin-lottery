@@ -42,12 +42,29 @@ def getTargetAddress():
 @bottle.route('/api/ticketsByAddress')
 def ticketsByAddress():
 
-	address = request.query.addr
-	print 'ticketsByAddress: ' + address
+	# userAddr = request.query.addr
+	userAddr = '1669MUGQDuC1hzyvHg7bqWDUZCCNYoQqvf'
+
+	print 'ticketsByAddress: ' + userAddr
 
 	#TODO: get tickets for a particular address. Keep in mind address can deposit multiple times
+	potAddr = PotAddress.getCurrentAddress(startDate)
+	potAddrData = PotAddress.getData(potAddr)
 
-	return 'address: ' + address
+	#expect 1 from Thcdk
+	#expect 3 from YoQqvf
+
+	btcDeposited = 0
+
+	for tx in potAddrData['txs']:
+		print ""
+		print 'checking transaction for...'
+		print tx['inputs'][0]['prev_out']['addr']
+		if(tx['inputs'][0]['prev_out']['addr'] == userAddr):
+			print tx['out'][0]['value']
+			btcDeposited += tx['out'][0]['value']
+
+	return str(btcDeposited)
 
 
 def determineWinner():
@@ -61,4 +78,3 @@ def determineWinner():
 
 
 
-	

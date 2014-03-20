@@ -14,11 +14,8 @@ window.addEventListener('load', function(){
 	$.get('api/targetAddress').done(function(dataStr){
 		var data = JSON.parse(dataStr);
 		console.log(data);
-
 		app.model = data;
-
 		app.render();
-
 	});
 
 });
@@ -33,13 +30,25 @@ var app = {
 		var qrcode = new QRCode(qrAnchor, {
 		    text: 'bitcoin:' + this.model.address,
 		    width: 200,
-		    height: 200,
-		    colorDark : "#000000",
-		    colorLight : "#ffffff",
-		    correctLevel : QRCode.CorrectLevel.H
+		    height: 200
+		    // colorDark : "#000000",
+		    // colorLight : "#ffffff",
+		    // correctLevel : QRCode.CorrectLevel.H
 		});
 
 		new Ticker(document.querySelector('.ticker-container'));
+
+		var $addrInput = $("#ticket-query input");
+		var $ticketQueryForm = $('#ticket-query');
+		$ticketQueryForm.submit(function(e){
+			e.preventDefault();
+			var addr = $addrInput[0].innerHTML;
+			console.log(addr);
+			$.get('api/ticketsByAddress?addr=' + addr).done(function(numSatoshi){
+				console.log(numSatoshi)
+				$ticketQueryForm.find('.result')[0].innerHTML = parseInt(numSatoshi) / 100000 + ' tickets';
+			});
+		})
 
 	}
 };

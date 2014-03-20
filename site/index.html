@@ -43,6 +43,12 @@
 		Buy tickets by sending Bitcoin to the address above. Tickets cost &#3647;0.001 (${{ (BTC_USD*.001).toFixed(4) }}) each.
 	</p>
 
+	<form id="ticket-query">
+		<label for="ticket-query-input">find tickets by address: </label>
+		<input id="ticket-query-input" type="text" placeholder="enter address"/>
+		<span class="result"></span>
+	</form>
+
 	<div id="buying-bitcoin">
 		Need coins? Buy from <a href="http://coinbase.com" target="_blank">Coinbase</a>
 	</div>
